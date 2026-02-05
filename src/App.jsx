@@ -13,6 +13,12 @@ import {
   Share2,
   Printer,
   Loader2,
+  Bold,
+  Italic,
+  Link2,
+  List,
+  Heading2,
+  Quote,
 } from 'lucide-react'
 
 // --- Supabase ---
@@ -304,6 +310,27 @@ export default function App() {
     await supabase.auth.signOut()
   }
 
+  // --- Helper: Insert text into textarea ---
+  const insertAtCursor = (before, after = '') => {
+    const textarea = document.getElementById('content-editor')
+    if (!textarea) return
+
+    const start = textarea.selectionStart
+    const end = textarea.selectionEnd
+    const text = formData.content
+    const selectedText = text.substring(start, end)
+
+    const newText = text.substring(0, start) + before + selectedText + after + text.substring(end)
+    setFormData({ ...formData, content: newText })
+
+    // Restore cursor position
+    setTimeout(() => {
+      textarea.focus()
+      textarea.selectionStart = start + before.length
+      textarea.selectionEnd = start + before.length + selectedText.length
+    }, 0)
+  }
+
   // --- Views ---
   const Navbar = () => (
     <div className="border-b-4 border-black mb-6 bg-stone-100">
@@ -492,7 +519,74 @@ export default function App() {
 
         <div>
           <label className="block text-sm font-bold text-stone-700 mb-1 uppercase tracking-wide">Contenido de la Nota</label>
+          
+          {/* Barra de herramientas de edición */}
+          <div className="mb-3 p-3 bg-stone-100 border-2 border-stone-300 rounded flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => insertAtCursor('**', '**')}
+              className="flex items-center gap-1 px-3 py-1 bg-white border border-stone-300 hover:bg-stone-200 rounded text-sm font-bold"
+              title="Negrita"
+            >
+              <Bold size={14} /> Bold
+            </button>
+            <button
+              type="button"
+              onClick={() => insertAtCursor('_', '_')}
+              className="flex items-center gap-1 px-3 py-1 bg-white border border-stone-300 hover:bg-stone-200 rounded text-sm"
+              title="Cursiva"
+            >
+              <Italic size={14} /> Italic
+            </button>
+            <button
+              type="button"
+              onClick={() => insertAtCursor('[', '](https://example.com)')}
+              className="flex items-center gap-1 px-3 py-1 bg-white border border-stone-300 hover:bg-stone-200 rounded text-sm"
+              title="Enlace"
+            >
+              <Link2 size={14} /> URL
+            </button>
+            <button
+              type="button"
+              onClick={() => insertAtCursor('## ', '\n')}
+              className="flex items-center gap-1 px-3 py-1 bg-white border border-stone-300 hover:bg-stone-200 rounded text-sm"
+              title="Encabezado"
+            >
+              <Heading2 size={14} /> Título
+            </button>
+            <button
+              type="button"
+              onClick={() => insertAtCursor('> ', '\n')}
+              className="flex items-center gap-1 px-3 py-1 bg-white border border-stone-300 hover:bg-stone-200 rounded text-sm"
+              title="Cita"
+            >
+              <Quote size={14} /> Cita
+            </button>
+            <button
+              type="button"
+              onClick={() => insertAtCursor('- ', '\n')}
+              className="flex items-center gap-1 px-3 py-1 bg-white border border-stone-300 hover:bg-stone-200 rounded text-sm"
+              title="Lista"
+            >
+              <List size={14} /> Lista
+            </button>
+          </div>
+
+          {/* Ayuda de formato */}
+          <details className="mb-2 text-xs text-stone-500">
+            <summary className="cursor-pointer font-bold hover:text-stone-700">💡 Ayuda de formato</summary>
+            <ul className="mt-2 space-y-1 pl-4 text-stone-600">
+              <li>**texto** → <strong>texto en negrita</strong></li>
+              <li>_texto_ → <em>texto en cursiva</em></li>
+              <li>[texto](url) → enlace clicable</li>
+              <li>## Texto → encabezado (subtítulo importante)</li>
+              <li>&gt; Texto → cita o destacado</li>
+              <li>- Texto → lista de viñetas</li>
+            </ul>
+          </details>
+
           <textarea
+            id="content-editor"
             required
             rows={12}
             value={formData.content}
@@ -656,6 +750,32 @@ export default function App() {
                 {mainStory.category}
               </span>
               <span className="text-xs text-stone-500 font-bold uppercase">{mainStory.date}</span>
+              {canEdit && (
+                <div className="flex gap-2 ml-auto">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleEditArticle(mainStory)
+                    }}
+                    className="p-1 hover:bg-stone-200 rounded text-stone-600"
+                    title="Editar"
+                  >
+                    <PenTool size={14} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleDeleteArticle(mainStory.id)
+                    }}
+                    className="p-1 hover:bg-red-100 text-red-600 rounded"
+                    title="Borrar"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              )}
             </div>
             <h2
               onClick={() => handleOpenArticle(mainStory)}
@@ -699,14 +819,14 @@ export default function App() {
                 <span className="text-xs font-bold text-red-700 uppercase tracking-widest">{article.category}</span>
 
                 {canEdit && (
-                  <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="flex gap-2">
                     <button
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation()
                         handleEditArticle(article)
                       }}
-                      className="p-1 hover:bg-stone-200 rounded"
+                      className="p-1 hover:bg-stone-200 rounded text-stone-600"
                       title="Editar"
                     >
                       <PenTool size={12} />
