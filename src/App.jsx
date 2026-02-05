@@ -332,9 +332,9 @@ export default function App() {
 
       <div className="container mx-auto px-4 py-8 text-center relative">
         <h1 className="text-5xl md:text-7xl font-serif font-black tracking-tighter mb-2 text-stone-900">
-  LAB de Periodismo Crítico
-</h1>
-<p className="font-serif italic text-stone-600 text-lg">Periodismo Crítico Universitario.</p>
+          LAB de Periodismo Crítico
+        </h1>
+        <p className="font-serif italic text-stone-600 text-lg">Periodismo Crítico Universitario.</p>
 
         <div className="absolute right-4 top-1/2 -translate-y-1/2 hidden lg:flex gap-2">
           {canEdit && (
@@ -649,20 +649,28 @@ export default function App() {
         )}
 
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 border-b-2 border-black pb-12">
-          <div className="lg:col-span-8 group cursor-pointer" onClick={() => handleOpenArticle(mainStory)}>
+          {/* EDITADO: se quitó onClick del contenedor para que no robe focus/inputs */}
+          <div className="lg:col-span-8 group">
             <div className="mb-2 flex items-center gap-2">
               <span className="bg-red-700 text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-widest">
                 {mainStory.category}
               </span>
               <span className="text-xs text-stone-500 font-bold uppercase">{mainStory.date}</span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-serif font-black text-stone-900 mb-4 leading-none group-hover:underline decoration-4 decoration-stone-300 underline-offset-4">
+            <h2
+              onClick={() => handleOpenArticle(mainStory)}
+              className="text-4xl md:text-6xl font-serif font-black text-stone-900 mb-4 leading-none group-hover:underline decoration-4 decoration-stone-300 underline-offset-4 cursor-pointer"
+            >
               {mainStory.title}
             </h2>
             <div className="h-1 w-20 bg-black mb-4"></div>
             <p className="text-xl md:text-2xl font-serif text-stone-700 italic leading-relaxed">{mainStory.subtitle}</p>
             <div className="mt-4 flex gap-2">
-              <button type="button" className="text-red-700 font-bold text-sm uppercase tracking-widest hover:bg-red-50 px-2 py-1 -ml-2">
+              <button
+                type="button"
+                onClick={() => handleOpenArticle(mainStory)}
+                className="text-red-700 font-bold text-sm uppercase tracking-widest hover:bg-red-50 px-2 py-1 -ml-2"
+              >
                 Leer nota completa &rarr;
               </button>
             </div>
@@ -756,10 +764,10 @@ export default function App() {
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
           <div className="md:col-span-2">
             <h2 className="text-white text-2xl font-serif font-bold mb-4">LAB de Periodismo Crítico</h2>
-<p className="mb-4 max-w-md">
-  LAB de Periodismo Crítico Universitario documenta el uso de recursos públicos y decisiones institucionales en universidades públicas, con foco inicial en la UACJ y Ciudad Juárez, a partir de evidencia documental fidedigna y verificable.
-</p>
-<p>&copy; {new Date().getFullYear()} LAB de Periodismo Crítico. Todos los derechos reservados.</p>
+            <p className="mb-4 max-w-md">
+              LAB de Periodismo Crítico Universitario documenta el uso de recursos públicos y decisiones institucionales en universidades públicas, con foco inicial en la UACJ y Ciudad Juárez, a partir de evidencia documental fidedigna y verificable.
+            </p>
+            <p>&copy; {new Date().getFullYear()} LAB de Periodismo Crítico. Todos los derechos reservados.</p>
           </div>
 
           <div>
