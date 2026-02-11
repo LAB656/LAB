@@ -1254,16 +1254,14 @@ const ArticleDetail = ({ articles, canEdit, handleEditArticle, handleDeleteArtic
 
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <div className="max-w-4xl mx-auto bg-white border border-stone-200 shadow-sm p-6 md:p-12 mb-12">
-        <button
-          onClick={() => navigate(-1)}
-          className="mb-8 flex items-center gap-2 text-stone-500 hover:text-stone-900 uppercase tracking-widest text-xs font-bold group"
-        >
-          <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-          Volver
-        </button>
-      </div>
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-8 flex items-center gap-2 text-stone-500 hover:text-stone-900 uppercase tracking-widest text-xs font-bold group transition-colors"
+      >
+        <ChevronLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+        Volver
+      </button>
 
       <article className="bg-white p-8 md:p-12 border border-stone-300 shadow-xl">
         <div className="mb-6 flex flex-wrap gap-3 items-center text-xs">
