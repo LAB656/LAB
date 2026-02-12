@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://LAB656.github.io/LAB",
+  "homepage": "https://lab656.github.io/lab",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
