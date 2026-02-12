@@ -981,6 +981,7 @@ const EditorView = ({ formData, setFormData, isEditing, loading, handleSave, set
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                 className="w-full p-2 border-2 border-stone-300 focus:border-black outline-none bg-white font-serif"
               >
+                <option>Reportajes</option>
                 <option>Blog</option>
                 <option>Dossier</option>
                 <option>Editorial</option>
@@ -2359,7 +2360,7 @@ const SubscribeModal = ({ isOpen, onClose }) => {
                   Temas de interés <span className="text-stone-400 text-xs">(selecciona uno o más)</span>
                 </label>
                 <div className="grid grid-cols-2 gap-3">
-                  {['Blog', 'Dossier', 'Editorial', 'Gobierno Universitario', 'Minuto LAB'].map((interest) => (
+                  {['Blog', 'Dossier', 'Reportajes', 'Editorial', 'Gobierno Universitario', 'Minuto LAB'].map((interest) => (
                     <label
                       key={interest}
                       className={`flex items-center gap-2 p-3 border-2 cursor-pointer transition-all ${interests.includes(interest)
