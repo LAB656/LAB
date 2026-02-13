@@ -2820,6 +2820,7 @@ export default function App() {
             </p>
             <p>&copy; {new Date().getFullYear()} LAB de Periodismo Crítico. Todos los derechos reservados.</p>
 
+
             {/* CONTADOR DE VISITAS */}
             <div className="mt-4 pt-4 border-t border-stone-700">
               <VisitCounter />
@@ -2868,7 +2869,7 @@ export default function App() {
             </ul>
             <div className="mt-6 pt-4 border-t border-stone-700">
               <a
-                href="https://www.facebook.com/profile.php?id=61587394063219"
+                href="https://www.facebook.com/profile.php?id=61587931865017"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-stone-400 hover:text-blue-500 transition-colors"
